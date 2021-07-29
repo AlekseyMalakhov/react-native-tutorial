@@ -3,6 +3,7 @@ import WelcomeScreen from "./app/screens/WelcomeScreen";
 import { View, StyleSheet } from "react-native";
 import Card from "./app/components/Card";
 import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
+import ViewImageScreen from "./app/screens/ViewImageScreen";
 
 const styles = StyleSheet.create({
     someview: {
@@ -15,7 +16,8 @@ export default function App() {
     return (
         <View style={styles.someview}>
             {/* <Card title="Red jacket for sale" subTitle="$100" image={require("./app/assets/jacket.jpg")} /> */}
-            <ListingDetailsScreen />
+            {/* <ListingDetailsScreen /> */}
+            <ViewImageScreen />
         </View>
     );
 }
