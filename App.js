@@ -15,9 +15,10 @@ const styles = StyleSheet.create({
 export default function App() {
     return (
         <View style={styles.someview}>
+            <WelcomeScreen />
             {/* <Card title="Red jacket for sale" subTitle="$100" image={require("./app/assets/jacket.jpg")} /> */}
             {/* <ListingDetailsScreen /> */}
-            <ViewImageScreen />
+            {/* <ViewImageScreen /> */}
         </View>
     );
 }

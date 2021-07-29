@@ -1,6 +1,6 @@
 import React from "react";
 import { ImageBackground, StyleSheet, View, Image, Text } from "react-native";
-import LoginButton from "../components/LoginButton";
+import AppButton from "../components/AppButton";
 
 const styles = StyleSheet.create({
     background: {
@@ -26,20 +26,23 @@ const styles = StyleSheet.create({
         position: "absolute",
         bottom: 30,
     },
+    tagline: {
+        fontSize: 25,
+        fontWeight: "600",
+        paddingVertical: 20,
+    },
 });
 
 function WelcomeScreen(props) {
     return (
-        <ImageBackground style={styles.background} source={require("../assets/background.jpg")}>
+        <ImageBackground style={styles.background} source={require("../assets/background.jpg")} blurRadius={2}>
             <View style={styles.logoContainer}>
                 <Image style={styles.logo} source={require("../assets/logo-red.png")} />
-                <Text>Sell what you don't need</Text>
+                <Text style={styles.tagline}>Sell what you don't need</Text>
             </View>
             <View style={styles.buttons}>
-                <LoginButton color="secondary" style={{ marginBottom: 20 }}>
-                    Login
-                </LoginButton>
-                <LoginButton color="primary">Register</LoginButton>
+                <AppButton title="Login" onPressHandler={() => console.log("tapped")} />
+                <AppButton color="secondary" title="Register" />
             </View>
         </ImageBackground>
     );
