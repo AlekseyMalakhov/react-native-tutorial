@@ -28,8 +28,6 @@ function Card(props) {
     const ratio = (screenWidth - imgHorizontalMargin * 2) / width;
     const imgHeight = height * ratio;
 
-    console.log(screenWidth);
-    console.log(imgHeight);
     return (
         <View style={styles.card}>
             <Image style={[styles.img, { height: imgHeight }]} source={props.image} resizeMode="contain" />
