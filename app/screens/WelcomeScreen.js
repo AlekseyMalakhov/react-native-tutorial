@@ -1,21 +1,12 @@
 import React from "react";
 import { ImageBackground, StyleSheet, View, Image, Text } from "react-native";
+import LoginButton from "../components/LoginButton";
 
 const styles = StyleSheet.create({
     background: {
         flex: 1,
         justifyContent: "flex-end",
         alignItems: "center",
-    },
-    loginButton: {
-        width: "100%",
-        height: 70,
-        backgroundColor: "#fc5c65",
-    },
-    registerButton: {
-        width: "100%",
-        height: 70,
-        backgroundColor: "#4ecdc4",
     },
     logoContainer: {
         position: "absolute",
@@ -26,6 +17,15 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
     },
+    buttons: {
+        flex: 1,
+        width: "100%",
+        height: 120,
+        justifyContent: "space-between",
+        paddingHorizontal: 20,
+        position: "absolute",
+        bottom: 30,
+    },
 });
 
 function WelcomeScreen(props) {
@@ -35,8 +35,12 @@ function WelcomeScreen(props) {
                 <Image style={styles.logo} source={require("../assets/logo-red.png")} />
                 <Text>Sell what you don't need</Text>
             </View>
-            <View style={styles.loginButton}></View>
-            <View style={styles.registerButton}></View>
+            <View style={styles.buttons}>
+                <LoginButton color="secondary" style={{ marginBottom: 20 }}>
+                    Login
+                </LoginButton>
+                <LoginButton color="primary">Register</LoginButton>
+            </View>
         </ImageBackground>
     );
 }
