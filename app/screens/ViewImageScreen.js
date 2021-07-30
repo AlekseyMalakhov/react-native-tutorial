@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
 function ViewImageScreen(props) {
     return (
         <View style={styles.container}>
-            <MaterialCommunityIcons style={styles.closeIcon} name="close" size={30} color="white" />
-            <MaterialCommunityIcons style={styles.deleteIcon} name="trash-can-outline" size={30} color="white" />
+            <MaterialCommunityIcons style={styles.closeIcon} name="close" size={35} color="white" />
+            <MaterialCommunityIcons style={styles.deleteIcon} name="trash-can-outline" size={35} color="white" />
             <Image style={styles.img} resizeMode="contain" source={require("../assets/chair.jpg")} />
         </View>
     );
