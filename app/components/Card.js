@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, View, StyleSheet, Text, Dimensions, StatusBar, Platform } from "react-native";
 import colors from "../config/colors";
+import AppText from "./AppText";
 
 const styles = StyleSheet.create({
     card: {
@@ -8,12 +9,30 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
         marginBottom: 20,
     },
+    image: {
+        width: "100%",
+        height: 200,
+    },
+    detailsContainer: {
+        padding: 20,
+    },
+    title: {
+        marginBottom: 7,
+    },
+    subTitle: {
+        color: colors.secondary,
+        fontWeight: "bold",
+    },
 });
 
 function Card({ title, subTitle, image }) {
     return (
         <View style={styles.card}>
-            <Image source={require(image)} />
+            <Image style={styles.image} source={image} />
+            <View style={styles.detailsContainer}>
+                <AppText style={styles.title}>{title}</AppText>
+                <AppText style={styles.subTitle}>{subTitle}</AppText>
+            </View>
         </View>
     );
 }
