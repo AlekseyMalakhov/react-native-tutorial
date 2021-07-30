@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
     someview: {
         backgroundColor: "#f8f4f4",
         flex: 1,
-        padding: 20,
-        paddingTop: 100,
+        //padding: 20,
+        //paddingTop: 100,
     },
 });
 
@@ -18,8 +18,8 @@ export default function App() {
     return (
         <View style={styles.someview}>
             {/* <WelcomeScreen /> */}
-            <Card title="Red jacket for sale" subTitle="$100" image={require("./app/assets/jacket.jpg")} />
-            {/* <ListingDetailsScreen /> */}
+            {/* <Card title="Red jacket for sale" subTitle="$100" image={require("./app/assets/jacket.jpg")} /> */}
+            <ListingDetailsScreen />
             {/* <ViewImageScreen /> */}
         </View>
     );
