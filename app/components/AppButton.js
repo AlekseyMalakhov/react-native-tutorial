@@ -29,25 +29,3 @@ function AppButton({ title, onPress, color = "primary" }) {
 }
 
 export default AppButton;
-
-//mine
-// const styles = StyleSheet.create({
-//     loginButton: {
-//         width: "100%",
-//         paddingVertical: 12,
-//         borderRadius: 30,
-//     },
-//     loginText: {
-//         textAlign: "center",
-//         color: "white",
-//         fontSize: 16,
-//         textTransform: "uppercase",
-//     },
-// });
-
-//     return (
-//         <TouchableOpacity style={[styles.loginButton, { backgroundColor: colors[props.color] }]} onPress={onPressLearnMore}>
-//             <Text style={styles.loginText}>{props.children}</Text>
-//         </TouchableOpacity>
-//     );
-// }
