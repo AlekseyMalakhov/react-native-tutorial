@@ -12,6 +12,7 @@ import Icon from "./app/components/Icon";
 import ListItem from "./app/components/ListItem";
 import AppTextInput from "./app/components/AppTextInput";
 import AppPicker from "./app/components/AppPicker";
+import LoginScreen from "./app/screens/LoginScreen";
 
 const styles = StyleSheet.create({
     someview: {
@@ -20,15 +21,7 @@ const styles = StyleSheet.create({
     },
 });
 
-const categories = [
-    { label: "Furniture", value: 1 },
-    { label: "Clothing", value: 2 },
-    { label: "Cameras", value: 3 },
-];
-
 export default function App() {
-    const [category, setCategory] = useState(categories[0]);
-
     return (
         // <View style={styles.someview}>
         //     <WelcomeScreen />
@@ -39,16 +32,17 @@ export default function App() {
         //     <AccountScreen />
         //     <ListingScreen />
         // </View>
-        <Screen>
-            {/* <AppTextInput placeholder="Username" icon="email" /> */}
-            <AppPicker
-                selectedItem={category}
-                onSelectItem={(item) => setCategory(item)}
-                items={categories}
-                icon="apps"
-                placeholder="Category"
-            ></AppPicker>
-            <AppTextInput icon="email" placeholder="email" />
-        </Screen>
+        // <Screen>
+        //     <AppTextInput placeholder="Username" icon="email" />
+        //     <AppPicker
+        //         selectedItem={category}
+        //         onSelectItem={(item) => setCategory(item)}
+        //         items={categories}
+        //         icon="apps"
+        //         placeholder="Category"
+        //     ></AppPicker>
+        //     <AppTextInput icon="email" placeholder="email" />
+        // </Screen>
+        <LoginScreen />
     );
 }

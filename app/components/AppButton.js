@@ -20,9 +20,9 @@ const styles = StyleSheet.create({
     },
 });
 
-function AppButton({ title, onPressHandler, color = "primary" }) {
+function AppButton({ title, onPress, color = "primary" }) {
     return (
-        <TouchableOpacity style={[styles.button, { backgroundColor: colors[color] }]} onPress={onPressHandler}>
+        <TouchableOpacity style={[styles.button, { backgroundColor: colors[color] }]} onPress={onPress}>
             <Text style={styles.text}>{title}</Text>
         </TouchableOpacity>
     );
