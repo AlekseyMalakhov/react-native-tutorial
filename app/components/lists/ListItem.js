@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
         color: colors.medium,
     },
     detailsContainer: {
+        flex: 1,
         marginLeft: 10,
         justifyContent: "center",
     },
@@ -47,8 +48,14 @@ function ListItem({ title, subTitle, image, IconComponent, onPressHandler, rende
                         {IconComponent}
                         {image && <Image style={styles.image} source={image} />}
                         <View style={styles.detailsContainer}>
-                            <AppText style={styles.title}>{title}</AppText>
-                            {subTitle && <AppText style={styles.subTitle}>{subTitle}</AppText>}
+                            <AppText style={styles.title} numberOfLines={1}>
+                                {title}
+                            </AppText>
+                            {subTitle && (
+                                <AppText style={styles.subTitle} numberOfLines={1}>
+                                    {subTitle}
+                                </AppText>
+                            )}
                         </View>
                     </View>
                     {showChevrons && <MaterialCommunityIcons name="chevron-right" size={20} style={styles.chevron} />}
