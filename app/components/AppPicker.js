@@ -5,6 +5,7 @@ import appStyles from "../config/appStyles";
 import AppText from "./AppText";
 import Screen from "./Screen";
 import PickerItem from "./PickerItem";
+import colors from "../config/colors";
 
 const styles = StyleSheet.create({
     container: {
@@ -21,6 +22,9 @@ const styles = StyleSheet.create({
     text: {
         flex: 1,
     },
+    placeholder: {
+        color: colors.medium,
+    },
 });
 
 function AppPicker({ icon, placeholder, items, onSelectItem, selectedItem }) {
@@ -31,7 +35,7 @@ function AppPicker({ icon, placeholder, items, onSelectItem, selectedItem }) {
             <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
                 <View style={styles.container}>
                     {icon && <MaterialCommunityIcons name={icon} size={20} color={appStyles.colors.medium} style={styles.icon} />}
-                    <AppText style={styles.text}>{selectedItem ? selectedItem.label : placeholder}</AppText>
+                    <AppText style={selectedItem ? styles.text : styles.placeholder}>{selectedItem ? selectedItem.label : placeholder}</AppText>
                     <MaterialCommunityIcons name="chevron-down" size={20} color={appStyles.colors.medium} />
                 </View>
             </TouchableWithoutFeedback>

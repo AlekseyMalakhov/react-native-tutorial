@@ -26,9 +26,9 @@ const styles = StyleSheet.create({
 });
 
 const validationSchema = Yup.object().shape({
-    title: Yup.string().required().label("Title"),
-    price: Yup.string().required().label("Price"),
-    description: Yup.string().required().label("Description"),
+    title: Yup.string().required().min(1).label("Title"),
+    price: Yup.number().required().min(1).max(10000).label("Price"),
+    description: Yup.string().optional().label("Description"),
     category: Yup.object()
         .shape({
             label: Yup.string().required(),
