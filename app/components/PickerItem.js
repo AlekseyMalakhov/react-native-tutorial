@@ -8,10 +8,10 @@ const styles = StyleSheet.create({
     },
 });
 
-function PickerItem({ label, onPress }) {
+function PickerItem({ item, onPress }) {
     return (
         <TouchableOpacity onPress={onPress}>
-            <AppText style={styles.text}>{label}</AppText>
+            <AppText style={styles.text}>{item.label}</AppText>
         </TouchableOpacity>
     );
 }

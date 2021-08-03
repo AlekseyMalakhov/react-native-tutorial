@@ -29,10 +29,10 @@ export default function App() {
     return (
         // <View style={styles.someview}>
         //     <WelcomeScreen />
-        //     <Card title="Red jacket for sale" subTitle="$100" image={require("./app/assets/jacket.jpg")} />
+        // <Card title="Red jacket for sale" subTitle="$100" image={require("./app/assets/jacket.jpg")} />
         //     <ListingDetailsScreen />
         //     <ViewImageScreen />
-        //     <MessagesScreen />
+        // <MessagesScreen />
         //     <AccountScreen />
         //     <ListingScreen />
         // </View>
@@ -47,10 +47,10 @@ export default function App() {
         //     ></AppPicker>
         //     <AppTextInput icon="email" placeholder="email" />
         // </Screen>
-        // <ListingEditScreen />
+        <ListingEditScreen />
         // <Screen>
         //     <ListItem title="t1" subTitle="D1" image={require("./app/assets/mosh.jpg")} />
         // </Screen>
-        <AccountScreen />
+        // <AccountScreen />
     );
 }

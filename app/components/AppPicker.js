@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TouchableWithoutFeedback, Modal, Button, FlatList } from "react-native";
+import { View, StyleSheet, TouchableWithoutFeedback, Modal, Button, FlatList, Text } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import appStyles from "../config/appStyles";
 import AppText from "./AppText";
@@ -27,8 +27,13 @@ const styles = StyleSheet.create({
     },
 });
 
-function AppPicker({ icon, placeholder, items, onSelectItem, selectedItem }) {
+function AppPicker({ icon, placeholder, items, onSelectItem, selectedItem, numberOfColumns = 1, PickerItemComponent = PickerItem }) {
     const [modalVisible, setModalVisible] = useState(false);
+
+    const select = (item) => {
+        setModalVisible(false);
+        onSelectItem(item);
+    };
 
     return (
         <React.Fragment>
@@ -45,12 +50,12 @@ function AppPicker({ icon, placeholder, items, onSelectItem, selectedItem }) {
                     <FlatList
                         data={items}
                         keyExtractor={(item) => item.value.toString()}
+                        numColumns={numberOfColumns}
                         renderItem={({ item }) => (
-                            <PickerItem
-                                label={item.label}
+                            <PickerItemComponent
+                                item={item}
                                 onPress={() => {
-                                    setModalVisible(false);
-                                    onSelectItem(item);
+                                    select(item);
                                 }}
                             />
                         )}
