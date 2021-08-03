@@ -28,13 +28,8 @@ const styles = StyleSheet.create({
 const validationSchema = Yup.object().shape({
     title: Yup.string().required().min(1).label("Title"),
     price: Yup.number().required().min(1).max(10000).label("Price"),
-    description: Yup.string().optional().label("Description"),
-    category: Yup.object()
-        .shape({
-            label: Yup.string().required(),
-            value: Yup.number().required(),
-        })
-        .nullable(),
+    description: Yup.string().label("Description"),
+    //category: Yup.object().required().nullable().label("Category"),
 });
 
 function ListingEditScreen() {
@@ -51,9 +46,9 @@ function ListingEditScreen() {
                 validationSchema={validationSchema}
             >
                 <AppFormField placeholder="Title" name="title" autoCapitalize="none" autoCorrect={false} />
-                <AppFormField placeholder="Price" name="price" autoCapitalize="none" autoCorrect={false} />
+                <AppFormField placeholder="Price" name="price" autoCapitalize="none" autoCorrect={false} keyboardType="numeric" maxLength={8} />
                 <AppFormPicker placeholder="Category" name="category" items={items} />
-                <AppFormField placeholder="Description" name="description" autoCapitalize="none" autoCorrect={false} />
+                <AppFormField placeholder="Description" name="description" autoCapitalize="none" autoCorrect={false} multiline numberOfLines={3} />
                 <SubmitButton title="Post" />
             </AppForm>
         </Screen>
