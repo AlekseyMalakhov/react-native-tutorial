@@ -39,19 +39,23 @@ function AccountScreen(props) {
     return (
         <Screen style={styles.screen}>
             <View style={styles.container}>
-                <ListItem image={require("../assets/mosh.jpg")} title="Mosh Hamedani" subTitle="programmingwithmosh@gmail.com" />
+                <ListItem image={require("../assets/mosh.jpg")} title="Mosh Hamedani" subTitle="programming@gmail.com" showChevrons />
             </View>
             <View style={styles.container}>
                 <FlatList
                     data={menuItems}
                     keyExtractor={(option) => option.id.toString()}
                     renderItem={({ item }) => (
-                        <ListItem title={item.title} IconComponent={<Icon name={item.icon.name} backgroundColor={item.icon.backgroundColor} />} />
+                        <ListItem
+                            title={item.title}
+                            IconComponent={<Icon name={item.icon.name} backgroundColor={item.icon.backgroundColor} />}
+                            showChevrons
+                        />
                     )}
                     ItemSeparatorComponent={ListItemSeparator}
                 />
             </View>
-            <ListItem title="Log out" IconComponent={<Icon name="logout" backgroundColor="#ffe66d" />} />
+            <ListItem title="Log out" IconComponent={<Icon name="logout" backgroundColor="#ffe66d" />} showChevrons />
         </Screen>
     );
 }

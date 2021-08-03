@@ -14,6 +14,7 @@ import AppPicker from "./app/components/AppPicker";
 import LoginScreen from "./app/screens/LoginScreen";
 import RegisterScreen from "./app/screens/RegisterScreen";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
+import ListItem from "./app/components/lists/ListItem";
 
 const styles = StyleSheet.create({
     someview: {
@@ -21,6 +22,8 @@ const styles = StyleSheet.create({
         flex: 1,
     },
 });
+
+//title, subTitle, image, IconComponent, onPressHandler, renderRightActions
 
 export default function App() {
     return (
@@ -44,6 +47,10 @@ export default function App() {
         //     ></AppPicker>
         //     <AppTextInput icon="email" placeholder="email" />
         // </Screen>
-        <ListingEditScreen />
+        // <ListingEditScreen />
+        // <Screen>
+        //     <ListItem title="t1" subTitle="D1" image={require("./app/assets/mosh.jpg")} />
+        // </Screen>
+        <AccountScreen />
     );
 }

@@ -3,12 +3,15 @@ import { View, StyleSheet, Image, TouchableHighlight } from "react-native";
 import colors from "../../config/colors";
 import AppText from "../AppText";
 import Swipeable from "react-native-gesture-handler/Swipeable";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import appStyles from "../../config/appStyles";
 
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
         padding: 15,
         backgroundColor: colors.white,
+        justifyContent: "space-between",
     },
     image: {
         width: 70,
@@ -25,19 +28,30 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         justifyContent: "center",
     },
+    chevron: {
+        color: appStyles.colors.medium,
+        alignSelf: "center",
+    },
+    info: {
+        flex: 1,
+        flexDirection: "row",
+    },
 });
 
-function ListItem({ title, subTitle, image, IconComponent, onPressHandler, renderRightActions }) {
+function ListItem({ title, subTitle, image, IconComponent, onPressHandler, renderRightActions, showChevrons }) {
     return (
         <Swipeable renderRightActions={renderRightActions}>
             <TouchableHighlight onPress={onPressHandler} underlayColor={colors.light}>
                 <View style={styles.container}>
-                    {IconComponent}
-                    {image && <Image style={styles.image} source={image} />}
-                    <View style={styles.detailsContainer}>
-                        <AppText style={styles.title}>{title}</AppText>
-                        {subTitle && <AppText style={styles.subTitle}>{subTitle}</AppText>}
+                    <View style={styles.info}>
+                        {IconComponent}
+                        {image && <Image style={styles.image} source={image} />}
+                        <View style={styles.detailsContainer}>
+                            <AppText style={styles.title}>{title}</AppText>
+                            {subTitle && <AppText style={styles.subTitle}>{subTitle}</AppText>}
+                        </View>
                     </View>
+                    {showChevrons && <MaterialCommunityIcons name="chevron-right" size={20} style={styles.chevron} />}
                 </View>
             </TouchableHighlight>
         </Swipeable>
