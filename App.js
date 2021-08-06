@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
-import { View, StyleSheet, TextInput, Text, Switch } from "react-native";
+import { View, StyleSheet, TextInput, Text, Switch, Button, Image } from "react-native";
 import Card from "./app/components/Card";
 import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
@@ -15,6 +15,8 @@ import LoginScreen from "./app/screens/LoginScreen";
 import RegisterScreen from "./app/screens/RegisterScreen";
 import ListingEditScreen from "./app/screens/ListingEditScreen";
 import ListItem from "./app/components/lists/ListItem";
+import * as ImagePicker from "expo-image-picker";
+import ImageInput from "./app/components/ImageInput";
 
 const styles = StyleSheet.create({
     someview: {
@@ -26,6 +28,8 @@ const styles = StyleSheet.create({
 //title, subTitle, image, IconComponent, onPressHandler, renderRightActions
 
 export default function App() {
+    const [imageUri, setImageUri] = useState(null);
+
     return (
         // <View style={styles.someview}>
         //     <WelcomeScreen />
@@ -47,10 +51,15 @@ export default function App() {
         //     ></AppPicker>
         //     <AppTextInput icon="email" placeholder="email" />
         // </Screen>
-        <ListingEditScreen />
+        // <ListingEditScreen />
         // <Screen>
         //     <ListItem title="t1" subTitle="D1" image={require("./app/assets/mosh.jpg")} />
         // </Screen>
         // <AccountScreen />
+        <Screen>
+            {/* <Button title="Select Image" onPress={selectImage} />
+            <Image source={{ uri: imageUri }} style={{ width: 200, height: 200 }} /> */}
+            <ImageInput imageUri={imageUri} onChangeImage={(uri) => setImageUri(uri)} />
+        </Screen>
     );
 }
