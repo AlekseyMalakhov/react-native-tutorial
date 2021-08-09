@@ -17,6 +17,7 @@ import ListingEditScreen from "./app/screens/ListingEditScreen";
 import ListItem from "./app/components/lists/ListItem";
 import * as ImagePicker from "expo-image-picker";
 import ImageInput from "./app/components/ImageInput";
+import ImageInputList from "./app/components/ImageInputList";
 
 const styles = StyleSheet.create({
     someview: {
@@ -28,7 +29,18 @@ const styles = StyleSheet.create({
 //title, subTitle, image, IconComponent, onPressHandler, renderRightActions
 
 export default function App() {
-    const [imageUri, setImageUri] = useState(null);
+    const [imageUris, setImageUris] = useState([]);
+
+    const addImage = (imageURI) => {
+        const newUris = [...imageUris];
+        const newURI = {
+            uri: imageURI,
+            id: Date.now(),
+        };
+        newUris.push(newURI);
+        setImageUris(newUris);
+        console.log(newUris);
+    };
 
     return (
         // <View style={styles.someview}>
@@ -57,9 +69,8 @@ export default function App() {
         // </Screen>
         // <AccountScreen />
         <Screen>
-            {/* <Button title="Select Image" onPress={selectImage} />
-            <Image source={{ uri: imageUri }} style={{ width: 200, height: 200 }} /> */}
-            <ImageInput imageUri={imageUri} onChangeImage={(uri) => setImageUri(uri)} />
+            {/* <ImageInput imageUri={imageUri} onChangeImage={(uri) => setImageUri(uri)} /> */}
+            <ImageInputList imageUris={imageUris} onAddImage={addImage} />
         </Screen>
     );
 }

@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     },
 });
 
-function ImageInput({ imageUri, onChangeImage }) {
+function ImageInput({ imageUri, onChangeImage, style }) {
     const requestPermission = async () => {
         const result = await ImagePicker.requestCameraPermissionsAsync();
         if (!result.granted) {
@@ -44,7 +44,7 @@ function ImageInput({ imageUri, onChangeImage }) {
 
     return (
         <TouchableOpacity onPress={selectImage}>
-            <View style={styles.container}>
+            <View style={[styles.container, style]}>
                 {!imageUri ? <Icon name="camera" size={30} /> : <Image source={{ uri: imageUri }} style={styles.img} />}
             </View>
         </TouchableOpacity>
