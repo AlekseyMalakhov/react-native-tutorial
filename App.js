@@ -39,7 +39,13 @@ export default function App() {
         };
         newUris.push(newURI);
         setImageUris(newUris);
-        console.log(newUris);
+        //console.log(newUris);
+    };
+
+    const removeImage = (imageURI) => {
+        const newUris = [...imageUris];
+        const result = newUris.filter((img) => img.uri !== imageURI);
+        setImageUris(result);
     };
 
     return (
@@ -70,7 +76,7 @@ export default function App() {
         // <AccountScreen />
         <Screen>
             {/* <ImageInput imageUri={imageUri} onChangeImage={(uri) => setImageUri(uri)} /> */}
-            <ImageInputList imageUris={imageUris} onAddImage={addImage} />
+            <ImageInputList imageUris={imageUris} onAddImage={addImage} onRemoveImage={removeImage} />
         </Screen>
     );
 }

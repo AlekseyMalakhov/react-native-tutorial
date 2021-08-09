@@ -13,11 +13,13 @@ const styles = StyleSheet.create({
     },
 });
 
-function ImageInputList({ imageUris, onAddImage }) {
+function ImageInputList({ imageUris, onAddImage, onRemoveImage }) {
     return (
         <View style={styles.container}>
             {imageUris.length > 0
-                ? imageUris.map((uri) => <ImageInput imageUri={uri.uri} onChangeImage={(uri) => onAddImage(uri)} key={uri.id} style={styles.img} />)
+                ? imageUris.map((uri) => (
+                      <ImageInput imageUri={uri.uri} onChangeImage={onAddImage} onRemoveImage={onRemoveImage} key={uri.id} style={styles.img} />
+                  ))
                 : null}
             <ImageInput imageUri={null} onChangeImage={(uri) => onAddImage(uri)} style={styles.img} />
         </View>
