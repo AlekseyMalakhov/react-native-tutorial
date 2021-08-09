@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Screen from "../components/Screen";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
-import { AppFormField, SubmitButton, AppForm, AppFormPicker } from "../components/forms";
+import { AppFormField, SubmitButton, AppForm, AppFormPicker, FormImagePicker } from "../components/forms";
 import CategoryPickerItem from "../components/CategoryPickerItem";
+import * as Location from "expo-location";
 
 const items = [
     {
@@ -72,21 +73,46 @@ const validationSchema = Yup.object().shape({
     title: Yup.string().required().min(1).label("Title"),
     price: Yup.number().required().min(1).max(10000).label("Price"),
     description: Yup.string().label("Description"),
+    images: Yup.array().required().min(1).label("Images"),
 });
 
 function ListingEditScreen() {
+    const [location, setLocation] = useState(null);
+
+    const requestLocation = async () => {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== "granted") {
+            setErrorMsg("Permission to access location was denied");
+            return;
+        }
+
+        let location = await Location.getCurrentPositionAsync({});
+        setLocation(location);
+        console.log(location);
+    };
+
+    useEffect(() => {
+        requestLocation();
+    }, []);
+
     return (
         <Screen style={styles.container}>
             <AppForm
                 initialValues={{
+                    images: [],
                     title: "",
                     price: "",
                     category: null,
                     description: "",
                 }}
-                onSubmit={(values) => console.log(values)}
+                onSubmit={(values) => {
+                    const val = { ...values };
+                    val.location = location;
+                    console.log(val);
+                }}
                 validationSchema={validationSchema}
             >
+                <FormImagePicker name="images" />
                 <AppFormField placeholder="Title" name="title" autoCapitalize="none" autoCorrect={false} />
                 <AppFormField placeholder="Price" name="price" autoCapitalize="none" autoCorrect={false} keyboardType="numeric" maxLength={8} />
                 <AppFormPicker placeholder="Category" name="category" items={items} numberOfColumns={3} PickerItemComponent={CategoryPickerItem} />
