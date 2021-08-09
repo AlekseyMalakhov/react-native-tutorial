@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
-import { View, StyleSheet, TextInput, Text, Switch, Button, Image } from "react-native";
+import { View, StyleSheet, TextInput, Text, Switch, Button, Image, Modal } from "react-native";
 import Card from "./app/components/Card";
 import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
@@ -18,11 +18,28 @@ import ListItem from "./app/components/lists/ListItem";
 import * as ImagePicker from "expo-image-picker";
 import ImageInput from "./app/components/ImageInput";
 import ImageInputList from "./app/components/ImageInputList";
+import AppButton from "./app/components/AppButton";
 
 const styles = StyleSheet.create({
-    someview: {
-        backgroundColor: "#f8f4f4",
+    modalContainer: {
+        justifyContent: "center",
+        alignItems: "center",
         flex: 1,
+    },
+    requestWindow: {
+        justifyContent: "center",
+        alignItems: "center",
+        width: "50%",
+        height: "15%",
+        backgroundColor: "green",
+        borderColor: "black",
+        borderRadius: 20,
+    },
+    buttons: {
+        marginTop: 10,
+        flexDirection: "row",
+        width: "100%",
+        justifyContent: "space-evenly",
     },
 });
 
@@ -30,6 +47,8 @@ const styles = StyleSheet.create({
 
 export default function App() {
     const [imageUris, setImageUris] = useState([]);
+    const [showRequest, setShowRequest] = useState(false);
+    const [imgToRemove, setImgToRemove] = useState(null);
 
     const addImage = (imageURI) => {
         const newUris = [...imageUris];
@@ -42,10 +61,22 @@ export default function App() {
         //console.log(newUris);
     };
 
-    const removeImage = (imageURI) => {
+    const askToRemove = (imageURI) => {
+        setImgToRemove(imageURI);
+        setShowRequest(true);
+    };
+
+    const removeImage = () => {
         const newUris = [...imageUris];
-        const result = newUris.filter((img) => img.uri !== imageURI);
+        const result = newUris.filter((img) => img.uri !== imgToRemove);
         setImageUris(result);
+        setShowRequest(false);
+        setImgToRemove(null);
+    };
+
+    const cancel = () => {
+        setShowRequest(false);
+        setImgToRemove(null);
     };
 
     return (
@@ -76,7 +107,19 @@ export default function App() {
         // <AccountScreen />
         <Screen>
             {/* <ImageInput imageUri={imageUri} onChangeImage={(uri) => setImageUri(uri)} /> */}
-            <ImageInputList imageUris={imageUris} onAddImage={addImage} onRemoveImage={removeImage} />
+            <ImageInputList imageUris={imageUris} onAddImage={addImage} onRemoveImage={askToRemove} />
+            <Modal visible={showRequest} transparent animationType="fade">
+                <View style={styles.modalContainer}>
+                    <View style={styles.requestWindow}>
+                        <Text>Delete</Text>
+                        <Text>Do you realy want to delete this image?</Text>
+                        <View style={styles.buttons}>
+                            <Button title="Yes" styles={{ width: "100%" }} onPress={removeImage} />
+                            <Button title="No" styles={{ width: "100%" }} onPress={cancel} />
+                        </View>
+                    </View>
+                </View>
+            </Modal>
         </Screen>
     );
 }

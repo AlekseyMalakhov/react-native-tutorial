@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Modal } from "react-native";
 import ImageInput from "./ImageInput";
 
 const styles = StyleSheet.create({
