@@ -1,5 +1,5 @@
-import React, { Fragment, useEffect } from "react";
-import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
+import React, { useEffect } from "react";
+import { View, StyleSheet, TouchableOpacity, Image, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import colors from "../config/colors";
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     },
 });
 
-function ImageInput({ imageUri, onChangeImage, onRemoveImage, style }) {
+function ImageInput({ imageUri, onChangeImage, style }) {
     const requestPermission = async () => {
         const result = await ImagePicker.requestCameraPermissionsAsync();
         if (!result.granted) {
@@ -31,9 +31,21 @@ function ImageInput({ imageUri, onChangeImage, onRemoveImage, style }) {
         requestPermission();
     }, []);
 
+    const handlePress = () => {
+        if (!imageUri) selectImage();
+        else
+            Alert.alert("Delete", "Are you sure you want to delete this image?", [
+                { text: "Yes", onPress: () => onChangeImage(null) },
+                { text: "No" },
+            ]);
+    };
+
     const selectImage = async () => {
         try {
-            const result = await ImagePicker.launchImageLibraryAsync();
+            const result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                quality: 0.5,
+            });
             if (!result.cancelled) {
                 onChangeImage(result.uri);
             }
@@ -42,12 +54,8 @@ function ImageInput({ imageUri, onChangeImage, onRemoveImage, style }) {
         }
     };
 
-    const removeImage = () => {
-        onRemoveImage(imageUri);
-    };
-
     return (
-        <TouchableOpacity onPress={!imageUri ? selectImage : removeImage}>
+        <TouchableOpacity onPress={handlePress}>
             <View style={[styles.container, style]}>
                 {!imageUri ? <Icon name="camera" size={30} /> : <Image source={{ uri: imageUri }} style={styles.img} />}
             </View>

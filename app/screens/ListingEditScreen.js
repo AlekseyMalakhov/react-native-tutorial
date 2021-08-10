@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Screen from "../components/Screen";
 import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 import { AppFormField, SubmitButton, AppForm, AppFormPicker, FormImagePicker } from "../components/forms";
 import CategoryPickerItem from "../components/CategoryPickerItem";
-import * as Location from "expo-location";
+import useLocation from "../hooks/useLocation";
 
 const items = [
     {
@@ -73,27 +73,11 @@ const validationSchema = Yup.object().shape({
     title: Yup.string().required().min(1).label("Title"),
     price: Yup.number().required().min(1).max(10000).label("Price"),
     description: Yup.string().label("Description"),
-    images: Yup.array().required().min(1).label("Images"),
+    images: Yup.array().min(1, "Please select at least one image"),
 });
 
 function ListingEditScreen() {
-    const [location, setLocation] = useState(null);
-
-    const requestLocation = async () => {
-        let { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== "granted") {
-            setErrorMsg("Permission to access location was denied");
-            return;
-        }
-
-        let location = await Location.getCurrentPositionAsync({});
-        setLocation(location);
-        console.log(location);
-    };
-
-    useEffect(() => {
-        requestLocation();
-    }, []);
+    const location = useLocation();
 
     return (
         <Screen style={styles.container}>
