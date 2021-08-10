@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     },
 });
 
-function WelcomeScreen(props) {
+function WelcomeScreen({ navigation }) {
     return (
         <ImageBackground style={styles.background} source={require("../assets/background.jpg")} blurRadius={2}>
             <View style={styles.logoContainer}>
@@ -41,7 +41,7 @@ function WelcomeScreen(props) {
                 <Text style={styles.tagline}>Sell what you don't need</Text>
             </View>
             <View style={styles.buttons}>
-                <AppButton title="Login" onPressHandler={() => console.log("tapped")} />
+                <AppButton title="Login" onPress={() => navigation.navigate("Login")} />
                 <AppButton color="secondary" title="Register" />
             </View>
         </ImageBackground>
