@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
-import { View, StyleSheet, TextInput, Text, Switch, Button, Image, Modal } from "react-native";
+import { View, StyleSheet, TextInput, Text, Switch, Button, Image, Modal, TouchableOpacity } from "react-native";
 import Card from "./app/components/Card";
 import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
@@ -23,7 +23,7 @@ import FormImagePicker from "./app/components/forms/FormImagePicker";
 import { NavigationContainer, useNavigation, useRoute } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 
 const styles = StyleSheet.create({});
 
@@ -88,7 +88,25 @@ const Stack = createNativeStackNavigator();
 //     );
 // };
 
-// const Tab = createBottomTabNavigator();
+const ListingScreenNavigation = () => {
+    return (
+        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Listings">
+            <Stack.Screen name="Listings" component={ListingScreen} />
+            <Stack.Screen name="Listing details" component={ListingDetailsScreen} />
+        </Stack.Navigator>
+    );
+};
+
+const AccountScreenNavigation = () => {
+    return (
+        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Account">
+            <Stack.Screen name="Account" component={AccountScreen} />
+            <Stack.Screen name="MessagesScreen" component={MessagesScreen} />
+        </Stack.Navigator>
+    );
+};
+
+const Tab = createBottomTabNavigator();
 // const TabNavigator = () => {
 //     return (
 //         <Tab.Navigator>
@@ -98,14 +116,87 @@ const Stack = createNativeStackNavigator();
 //     );
 // };
 
+const BigButton = () => {
+    const navigation = useNavigation();
+    return (
+        <TouchableOpacity onPress={() => navigation.navigate("Listing Edit")}>
+            <View
+                style={{
+                    width: 60,
+                    height: 60,
+                    backgroundColor: "white",
+                    borderRadius: 30,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    bottom: 20,
+                }}
+            >
+                <View
+                    style={{
+                        width: 50,
+                        height: 50,
+                        backgroundColor: "tomato",
+                        borderRadius: 25,
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+                    <MaterialIcons name="add-circle" size={30} color="white" />
+                </View>
+            </View>
+        </TouchableOpacity>
+    );
+};
+
 export default function App() {
     return (
         // <View style={styles.someview}>
+
+        // <NavigationContainer>
+        //     <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Welcome">
+        //         <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        //         <Stack.Screen name="Login" component={LoginScreen} />
+        //     </Stack.Navigator>
+        // </NavigationContainer>
+
         <NavigationContainer>
-            <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Welcome">
-                <Stack.Screen name="Welcome" component={WelcomeScreen} />
-                <Stack.Screen name="Login" component={LoginScreen} />
-            </Stack.Navigator>
+            <Tab.Navigator
+                screenOptions={{
+                    headerShown: false,
+                    tabBarActiveTintColor: "tomato",
+                    tabBarStyle: {
+                        height: 60,
+                    },
+                    tabBarLabelStyle: {
+                        bottom: 10,
+                    },
+                }}
+            >
+                <Tab.Screen
+                    name="ListingsScreen"
+                    component={ListingScreenNavigation}
+                    options={{
+                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="home" color={color} size={25} />,
+                    }}
+                />
+                <Tab.Screen
+                    name="Listing Edit"
+                    component={ListingEditScreen}
+                    options={{
+                        tabBarButton: (props) => {
+                            console.log(props);
+                            return <BigButton />;
+                        },
+                    }}
+                />
+                <Tab.Screen
+                    name="AccountScreen"
+                    component={AccountScreenNavigation}
+                    options={{
+                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="account" color={color} size={25} />,
+                    }}
+                />
+            </Tab.Navigator>
         </NavigationContainer>
 
         //<LoginScreen />

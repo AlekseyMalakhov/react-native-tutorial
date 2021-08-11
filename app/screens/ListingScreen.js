@@ -26,13 +26,13 @@ const listings = [
     },
 ];
 
-function ListingScreen(props) {
+function ListingScreen({ navigation }) {
     return (
         <Screen style={styles.container}>
             <FlatList
                 data={listings}
                 keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => <Card title={item.title} subTitle={"$" + item.price} image={item.image} />}
+                renderItem={({ item }) => <Card title={item.title} subTitle={"$" + item.price} image={item.image} navigation={navigation} />}
             />
         </Screen>
     );

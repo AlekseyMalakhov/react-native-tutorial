@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, View, StyleSheet, Text, Dimensions, StatusBar, Platform } from "react-native";
+import { Image, View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import colors from "../config/colors";
 import AppText from "./AppText";
 
@@ -26,19 +26,21 @@ const styles = StyleSheet.create({
     },
 });
 
-function Card({ title, subTitle, image }) {
+function Card({ title, subTitle, image, navigation }) {
     return (
-        <View style={styles.card}>
-            <Image style={styles.image} source={image} />
-            <View style={styles.detailsContainer}>
-                <AppText style={styles.title} numberOfLines={1}>
-                    {title}
-                </AppText>
-                <AppText style={styles.subTitle} numberOfLines={1}>
-                    {subTitle}
-                </AppText>
+        <TouchableWithoutFeedback onPress={() => console.log(navigation.navigate("Listing details"))}>
+            <View style={styles.card}>
+                <Image style={styles.image} source={image} />
+                <View style={styles.detailsContainer}>
+                    <AppText style={styles.title} numberOfLines={1}>
+                        {title}
+                    </AppText>
+                    <AppText style={styles.subTitle} numberOfLines={1}>
+                        {subTitle}
+                    </AppText>
+                </View>
             </View>
-        </View>
+        </TouchableWithoutFeedback>
     );
 }
 
