@@ -26,16 +26,23 @@ const listings = [
     },
 ];
 
-function ListingScreen({ navigation }) {
+function ListingsScreen({ navigation }) {
     return (
         <Screen style={styles.container}>
             <FlatList
                 data={listings}
                 keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => <Card title={item.title} subTitle={"$" + item.price} image={item.image} navigation={navigation} />}
+                renderItem={({ item }) => (
+                    <Card
+                        title={item.title}
+                        subTitle={"$" + item.price}
+                        image={item.image}
+                        onPress={() => navigation.navigate("ListingDetails", item)}
+                    />
+                )}
             />
         </Screen>
     );
 }
 
-export default ListingScreen;
+export default ListingsScreen;

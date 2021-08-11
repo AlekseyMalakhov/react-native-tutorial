@@ -24,7 +24,7 @@ const menuItems = [
             name: "format-list-bulleted",
             backgroundColor: colors.primary,
         },
-        navigation: "",
+        targetScreen: "",
     },
     {
         id: 2,
@@ -33,7 +33,7 @@ const menuItems = [
             name: "email",
             backgroundColor: colors.secondary,
         },
-        navigation: "MessagesScreen",
+        targetScreen: "Messages",
     },
 ];
 
@@ -52,7 +52,7 @@ function AccountScreen({ navigation }) {
                             title={item.title}
                             IconComponent={<Icon name={item.icon.name} backgroundColor={item.icon.backgroundColor} />}
                             showChevrons
-                            onPressHandler={item.navigation ? () => navigation.navigate(item.navigation) : null}
+                            onPress={item.targetScreen ? () => navigation.navigate(item.targetScreen) : null}
                         />
                     )}
                     ItemSeparatorComponent={ListItemSeparator}

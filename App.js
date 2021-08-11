@@ -6,7 +6,7 @@ import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
 import MessagesScreen from "./app/screens/MessagesScreen";
 import AccountScreen from "./app/screens/AccountScreen";
-import ListingScreen from "./app/screens/ListingScreen";
+import ListingsScreen from "./app/screens/ListingsScreen";
 import Screen from "./app/components/Screen";
 import Icon from "./app/components/Icon";
 import AppTextInput from "./app/components/AppTextInput";
@@ -24,6 +24,9 @@ import { NavigationContainer, useNavigation, useRoute } from "@react-navigation/
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import AuthNavigator from "./app/navigation/AuthNavigator";
+import navigationTheme from "./app/navigation/navigationTheme";
+import AppNavigator from "./app/navigation/AppNavigator";
 
 const styles = StyleSheet.create({});
 
@@ -91,7 +94,7 @@ const Stack = createNativeStackNavigator();
 const ListingScreenNavigation = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Listings">
-            <Stack.Screen name="Listings" component={ListingScreen} />
+            <Stack.Screen name="Listings" component={ListingsScreen} />
             <Stack.Screen name="Listing details" component={ListingDetailsScreen} />
         </Stack.Navigator>
     );
@@ -159,44 +162,48 @@ export default function App() {
         //     </Stack.Navigator>
         // </NavigationContainer>
 
-        <NavigationContainer>
-            <Tab.Navigator
-                screenOptions={{
-                    headerShown: false,
-                    tabBarActiveTintColor: "tomato",
-                    tabBarStyle: {
-                        height: 60,
-                    },
-                    tabBarLabelStyle: {
-                        bottom: 10,
-                    },
-                }}
-            >
-                <Tab.Screen
-                    name="ListingsScreen"
-                    component={ListingScreenNavigation}
-                    options={{
-                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="home" color={color} size={25} />,
-                    }}
-                />
-                <Tab.Screen
-                    name="Listing Edit"
-                    component={ListingEditScreen}
-                    options={{
-                        tabBarButton: (props) => {
-                            console.log(props);
-                            return <BigButton />;
-                        },
-                    }}
-                />
-                <Tab.Screen
-                    name="AccountScreen"
-                    component={AccountScreenNavigation}
-                    options={{
-                        tabBarIcon: ({ color }) => <MaterialCommunityIcons name="account" color={color} size={25} />,
-                    }}
-                />
-            </Tab.Navigator>
+        // <NavigationContainer>
+        //     <Tab.Navigator
+        //         screenOptions={{
+        //             headerShown: false,
+        //             tabBarActiveTintColor: "tomato",
+        //             tabBarStyle: {
+        //                 height: 60,
+        //             },
+        //             tabBarLabelStyle: {
+        //                 bottom: 10,
+        //             },
+        //         }}
+        //     >
+        //         <Tab.Screen
+        //             name="ListingsScreen"
+        //             component={ListingScreenNavigation}
+        //             options={{
+        //                 tabBarIcon: ({ color }) => <MaterialCommunityIcons name="home" color={color} size={25} />,
+        //             }}
+        //         />
+        //         <Tab.Screen
+        //             name="Listing Edit"
+        //             component={ListingEditScreen}
+        //             options={{
+        //                 tabBarButton: (props) => {
+        //                     console.log(props);
+        //                     return <BigButton />;
+        //                 },
+        //             }}
+        //         />
+        //         <Tab.Screen
+        //             name="AccountScreen"
+        //             component={AccountScreenNavigation}
+        //             options={{
+        //                 tabBarIcon: ({ color }) => <MaterialCommunityIcons name="account" color={color} size={25} />,
+        //             }}
+        //         />
+        //     </Tab.Navigator>
+        // </NavigationContainer>
+
+        <NavigationContainer theme={navigationTheme}>
+            <AppNavigator />
         </NavigationContainer>
 
         //<LoginScreen />
@@ -205,7 +212,7 @@ export default function App() {
         //     <ViewImageScreen />
         // <MessagesScreen />
         //     <AccountScreen />
-        //     <ListingScreen />
+        //     <ListingsScreen />
         // </View>
         // <Screen>
         //     <AppTextInput placeholder="Username" icon="email" />

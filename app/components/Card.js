@@ -26,9 +26,9 @@ const styles = StyleSheet.create({
     },
 });
 
-function Card({ title, subTitle, image, navigation }) {
+function Card({ title, subTitle, image, onPress }) {
     return (
-        <TouchableWithoutFeedback onPress={() => console.log(navigation.navigate("Listing details"))}>
+        <TouchableWithoutFeedback onPress={onPress}>
             <View style={styles.card}>
                 <Image style={styles.image} source={image} />
                 <View style={styles.detailsContainer}>

@@ -39,10 +39,10 @@ const styles = StyleSheet.create({
     },
 });
 
-function ListItem({ title, subTitle, image, IconComponent, onPressHandler, renderRightActions, showChevrons }) {
+function ListItem({ title, subTitle, image, IconComponent, onPress, renderRightActions, showChevrons }) {
     return (
         <Swipeable renderRightActions={renderRightActions}>
-            <TouchableHighlight onPress={onPressHandler} underlayColor={colors.light}>
+            <TouchableHighlight onPress={onPress} underlayColor={colors.light}>
                 <View style={styles.container}>
                     <View style={styles.info}>
                         {IconComponent}
