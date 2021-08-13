@@ -7,6 +7,7 @@ import listingsApi from "../api/listings";
 import AppText from "../components/AppText";
 import AppButton from "../components/AppButton";
 import ActivityIndicator from "../components/ActivityIndicator";
+import useApi from "../hooks/useApi";
 
 const styles = StyleSheet.create({
     container: {
@@ -16,38 +17,23 @@ const styles = StyleSheet.create({
 });
 
 function ListingsScreen({ navigation }) {
-    const [listings, setListings] = useState([]);
-    const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const getListingsApi = useApi(listingsApi.getListings);
 
     useEffect(() => {
-        loadListings();
+        getListingsApi.request();
     }, []);
-
-    const loadListings = async () => {
-        setLoading(true);
-        const response = await listingsApi.getListings();
-        setLoading(false);
-
-        if (!response.ok) {
-            setError(true);
-            return;
-        }
-        setError(false);
-        setListings(response.data);
-    };
 
     return (
         <Screen style={styles.container}>
-            {error && (
+            {getListingsApi.error && (
                 <View>
                     <AppText>Couldn't retreave the listings.</AppText>
                     <AppButton title="Retry" onPress={loadListings}></AppButton>
                 </View>
             )}
-            <ActivityIndicator visible={loading} />
+            <ActivityIndicator visible={getListingsApi.loading} />
             <FlatList
-                data={listings}
+                data={getListingsApi.data}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
                     <Card
