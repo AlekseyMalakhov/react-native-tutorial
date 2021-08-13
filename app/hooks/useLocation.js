@@ -12,7 +12,8 @@ const useLocation = () => {
                 return;
             }
 
-            let location = await Location.getLastKnownPositionAsync({});
+            let location = await Location.getCurrentPositionAsync();
+            console.log(location);
             const loc = {
                 latitude: location.coords.latitude,
                 longitude: location.coords.longitude,

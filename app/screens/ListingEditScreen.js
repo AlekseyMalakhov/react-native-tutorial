@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import { AppFormField, SubmitButton, AppForm, AppFormPicker, FormImagePicker } from "../components/forms";
 import CategoryPickerItem from "../components/CategoryPickerItem";
 import useLocation from "../hooks/useLocation";
+import listingsApi from "../api/listings";
+import useApi from "../hooks/useApi";
 
 const items = [
     {
@@ -78,6 +80,13 @@ const validationSchema = Yup.object().shape({
 
 function ListingEditScreen() {
     const location = useLocation();
+    const sendListingApi = useApi(listingsApi.addListing);
+
+    const handleSubmit = (listing) => {
+        const data = { ...listing };
+        data.location = location;
+        sendListingApi.request(data);
+    };
 
     return (
         <Screen style={styles.container}>
@@ -89,11 +98,7 @@ function ListingEditScreen() {
                     category: null,
                     description: "",
                 }}
-                onSubmit={(values) => {
-                    const val = { ...values };
-                    val.location = location;
-                    console.log(val);
-                }}
+                onSubmit={handleSubmit}
                 validationSchema={validationSchema}
             >
                 <FormImagePicker name="images" />
