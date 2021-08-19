@@ -35,16 +35,6 @@ const styles = StyleSheet.create({});
 export default function App() {
     //const netinfo = useNetInfo();
 
-    const storeData = async (value) => {
-        try {
-            await AsyncStorage.setItem("@storage_Key", value);
-        } catch (e) {
-            // save error
-        }
-    };
-
-    storeData("fuck you");
-
     return (
         // <View style={styles.someview}>
 
@@ -95,9 +85,9 @@ export default function App() {
         //     </Tab.Navigator>
         // </NavigationContainer>
 
-        // <NavigationContainer theme={navigationTheme}>
-        //     <AppNavigator />
-        // </NavigationContainer>
+        <NavigationContainer theme={navigationTheme}>
+            <AppNavigator />
+        </NavigationContainer>
 
         //<LoginScreen />
         // <Card title="Red jacket for sale" subTitle="$100" image={require("./app/assets/jacket.jpg")} />
@@ -130,6 +120,5 @@ export default function App() {
         // <NavigationContainer>
         //     <TabNavigator />
         // </NavigationContainer>
-        <Text></Text>
     );
 }

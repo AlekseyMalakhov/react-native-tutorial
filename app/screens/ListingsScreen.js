@@ -28,7 +28,7 @@ function ListingsScreen({ navigation }) {
             {getListingsApi.error && (
                 <View>
                     <AppText>Couldn't retreave the listings.</AppText>
-                    <AppButton title="Retry" onPress={loadListings}></AppButton>
+                    <AppButton title="Retry" onPress={getListingsApi.request}></AppButton>
                 </View>
             )}
             <ActivityIndicator visible={getListingsApi.loading} />
@@ -41,6 +41,7 @@ function ListingsScreen({ navigation }) {
                         subTitle={"$" + item.price}
                         imageUrl={item.images[0].url}
                         onPress={() => navigation.navigate("ListingDetails", item)}
+                        thumbnailUrl={item.images[0].thumbnailUrl}
                     />
                 )}
             />
