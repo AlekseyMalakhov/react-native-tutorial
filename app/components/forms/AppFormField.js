@@ -4,10 +4,15 @@ import AppTextInput from "../AppTextInput";
 import { useFormikContext } from "formik";
 
 function AppFormField({ name, ...otherProps }) {
-    const { setFieldTouched, handleChange, errors, touched } = useFormikContext();
+    const { setFieldTouched, setFieldValue, errors, touched, values } = useFormikContext();
     return (
         <React.Fragment>
-            <AppTextInput onChangeText={handleChange(name)} onBlur={() => setFieldTouched(name)} {...otherProps} />
+            <AppTextInput
+                onChangeText={(val) => setFieldValue(name, val)}
+                onBlur={() => setFieldTouched(name)}
+                value={values[name]}
+                {...otherProps}
+            />
             <ErrorMessage error={errors[name]} visible={touched[name]} />
         </React.Fragment>
     );

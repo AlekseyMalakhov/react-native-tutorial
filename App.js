@@ -27,131 +27,24 @@ import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import AuthNavigator from "./app/navigation/AuthNavigator";
 import navigationTheme from "./app/navigation/navigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
+import NetInfo, { useNetInfo } from "@react-native-community/netinfo";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const styles = StyleSheet.create({});
 
-// const Link = () => {
-//     const navigation = useNavigation();
-//     return <Button title="Click" onPress={() => navigation.navigate("TweetDetails", { id: 1 })} />;
-// };
-
-// const Tweets = ({ navigation }) => {
-//     return (
-//         <Screen>
-//             <Text>Tweets</Text>
-//             {/* <Button title="View Tweet" onPress={() => navigation.navigate("TweetDetails")} /> */}
-//             <Link />
-//         </Screen>
-//     );
-// };
-
-// const TweetDetails = ({ route }) => {
-//     return (
-//         <Screen>
-//             <Text>TweetDetails {route.params.id}</Text>
-//         </Screen>
-//     );
-// };
-
-const Stack = createNativeStackNavigator();
-// const FeedNavigator = () => {
-//     return (
-//         <Stack.Navigator
-//             initialRouteName="Tweets"
-//             screenOptions={{
-//                 headerStyle: { backgroundColor: "dodgerblue" },
-//                 headerTintColor: "white",
-//             }}
-//         >
-//             <Stack.Screen
-//                 name="Tweets"
-//                 component={Tweets}
-//                 options={{
-//                     headerStyle: { backgroundColor: "tomato" },
-//                     headerTintColor: "white",
-//                     headerShown: false,
-//                 }}
-//             />
-//             <Stack.Screen
-//                 name="TweetDetails"
-//                 component={TweetDetails}
-//                 options={({ route }) => ({
-//                     title: "k" + route.params.id,
-//                 })}
-//             />
-//         </Stack.Navigator>
-//     );
-// };
-
-// const Account = () => {
-//     return (
-//         <Screen>
-//             <Text>Account</Text>
-//         </Screen>
-//     );
-// };
-
-const ListingScreenNavigation = () => {
-    return (
-        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Listings">
-            <Stack.Screen name="Listings" component={ListingsScreen} />
-            <Stack.Screen name="Listing details" component={ListingDetailsScreen} />
-        </Stack.Navigator>
-    );
-};
-
-const AccountScreenNavigation = () => {
-    return (
-        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Account">
-            <Stack.Screen name="Account" component={AccountScreen} />
-            <Stack.Screen name="MessagesScreen" component={MessagesScreen} />
-        </Stack.Navigator>
-    );
-};
-
-const Tab = createBottomTabNavigator();
-// const TabNavigator = () => {
-//     return (
-//         <Tab.Navigator>
-//             <Tab.Screen name="Feed" component={FeedNavigator} />
-//             <Tab.Screen name="Account" component={Account} />
-//         </Tab.Navigator>
-//     );
-// };
-
-const BigButton = () => {
-    const navigation = useNavigation();
-    return (
-        <TouchableOpacity onPress={() => navigation.navigate("Listing Edit")}>
-            <View
-                style={{
-                    width: 60,
-                    height: 60,
-                    backgroundColor: "white",
-                    borderRadius: 30,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    bottom: 20,
-                }}
-            >
-                <View
-                    style={{
-                        width: 50,
-                        height: 50,
-                        backgroundColor: "tomato",
-                        borderRadius: 25,
-                        justifyContent: "center",
-                        alignItems: "center",
-                    }}
-                >
-                    <MaterialIcons name="add-circle" size={30} color="white" />
-                </View>
-            </View>
-        </TouchableOpacity>
-    );
-};
-
 export default function App() {
+    //const netinfo = useNetInfo();
+
+    const storeData = async (value) => {
+        try {
+            await AsyncStorage.setItem("@storage_Key", value);
+        } catch (e) {
+            // save error
+        }
+    };
+
+    storeData("fuck you");
+
     return (
         // <View style={styles.someview}>
 
@@ -202,9 +95,9 @@ export default function App() {
         //     </Tab.Navigator>
         // </NavigationContainer>
 
-        <NavigationContainer theme={navigationTheme}>
-            <AppNavigator />
-        </NavigationContainer>
+        // <NavigationContainer theme={navigationTheme}>
+        //     <AppNavigator />
+        // </NavigationContainer>
 
         //<LoginScreen />
         // <Card title="Red jacket for sale" subTitle="$100" image={require("./app/assets/jacket.jpg")} />
@@ -237,5 +130,6 @@ export default function App() {
         // <NavigationContainer>
         //     <TabNavigator />
         // </NavigationContainer>
+        <Text></Text>
     );
 }
