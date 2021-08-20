@@ -29,11 +29,13 @@ import navigationTheme from "./app/navigation/navigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
 import NetInfo, { useNetInfo } from "@react-native-community/netinfo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import AppText from "./app/components/AppText";
+import OfflineNotice from "./app/components/OfflineNotice";
 
 const styles = StyleSheet.create({});
 
 export default function App() {
-    //const netinfo = useNetInfo();
+    const netinfo = useNetInfo();
 
     return (
         // <View style={styles.someview}>
@@ -84,10 +86,12 @@ export default function App() {
         //         />
         //     </Tab.Navigator>
         // </NavigationContainer>
-
-        <NavigationContainer theme={navigationTheme}>
-            <AppNavigator />
-        </NavigationContainer>
+        <React.Fragment>
+            <NavigationContainer theme={navigationTheme}>
+                <AppNavigator />
+            </NavigationContainer>
+            <OfflineNotice />
+        </React.Fragment>
 
         //<LoginScreen />
         // <Card title="Red jacket for sale" subTitle="$100" image={require("./app/assets/jacket.jpg")} />
