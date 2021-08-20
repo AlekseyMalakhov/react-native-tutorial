@@ -31,11 +31,12 @@ import NetInfo, { useNetInfo } from "@react-native-community/netinfo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AppText from "./app/components/AppText";
 import OfflineNotice from "./app/components/OfflineNotice";
+import AuthContext from "./app/auth/context";
 
 const styles = StyleSheet.create({});
 
 export default function App() {
-    const netinfo = useNetInfo();
+    const [user, setUser] = useState();
 
     return (
         // <View style={styles.someview}>
@@ -86,12 +87,10 @@ export default function App() {
         //         />
         //     </Tab.Navigator>
         // </NavigationContainer>
-        <React.Fragment>
-            <NavigationContainer theme={navigationTheme}>
-                <AppNavigator />
-            </NavigationContainer>
+        <AuthContext.Provider value={{ user, setUser }}>
+            <NavigationContainer theme={navigationTheme}>{user ? <AppNavigator /> : <AuthNavigator />}</NavigationContainer>
             <OfflineNotice />
-        </React.Fragment>
+        </AuthContext.Provider>
 
         //<LoginScreen />
         // <Card title="Red jacket for sale" subTitle="$100" image={require("./app/assets/jacket.jpg")} />
