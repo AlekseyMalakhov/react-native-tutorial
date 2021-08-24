@@ -24,28 +24,30 @@ function ListingsScreen({ navigation }) {
     }, []);
 
     return (
-        <Screen style={styles.container}>
-            {getListingsApi.error && (
-                <View>
-                    <AppText>Couldn't retreave the listings.</AppText>
-                    <AppButton title="Retry" onPress={getListingsApi.request}></AppButton>
-                </View>
-            )}
+        <React.Fragment>
             <ActivityIndicator visible={getListingsApi.loading} />
-            <FlatList
-                data={getListingsApi.data}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => (
-                    <Card
-                        title={item.title}
-                        subTitle={"$" + item.price}
-                        imageUrl={item.images[0].url}
-                        onPress={() => navigation.navigate("ListingDetails", item)}
-                        thumbnailUrl={item.images[0].thumbnailUrl}
-                    />
+            <Screen style={styles.container}>
+                {getListingsApi.error && (
+                    <View>
+                        <AppText>Couldn't retreave the listings.</AppText>
+                        <AppButton title="Retry" onPress={getListingsApi.request}></AppButton>
+                    </View>
                 )}
-            />
-        </Screen>
+                <FlatList
+                    data={getListingsApi.data}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={({ item }) => (
+                        <Card
+                            title={item.title}
+                            subTitle={"$" + item.price}
+                            imageUrl={item.images[0].url}
+                            onPress={() => navigation.navigate("ListingDetails", item)}
+                            thumbnailUrl={item.images[0].thumbnailUrl}
+                        />
+                    )}
+                />
+            </Screen>
+        </React.Fragment>
     );
 }
 

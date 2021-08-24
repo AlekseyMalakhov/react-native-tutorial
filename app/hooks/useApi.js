@@ -1,5 +1,4 @@
 import { useState } from "react";
-//import { Alert } from "react-native";
 
 export default useApi = (apiFunc) => {
     const [data, setData] = useState([]);
@@ -11,15 +10,9 @@ export default useApi = (apiFunc) => {
         const response = await apiFunc(...args);
         setLoading(false);
 
-        if (!response.ok) {
-            setError(true);
-            //Alert.alert("Could not save!");
-            return;
-        }
-        setError(false);
+        setError(!response.ok);
         setData(response.data);
-        //Alert.alert("Success");
+        return response;
     };
-
     return { data, error, loading, request };
 };
