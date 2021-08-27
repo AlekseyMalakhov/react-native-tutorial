@@ -36,6 +36,7 @@ import authStorage from "./app/auth/storage";
 import jwtDecode from "jwt-decode";
 import AppLoading from "expo-app-loading";
 import { navigationRef } from "./app/navigation/rootNavigation";
+import * as Notifications from "expo-notifications";
 
 const styles = StyleSheet.create({});
 
@@ -53,6 +54,21 @@ export default function App() {
     if (!isReady) {
         return <AppLoading startAsync={restoreUser} onFinish={() => setIsReady(true)} onError={(error) => console.log(error)} />;
     }
+
+    // Notifications.setNotificationHandler({
+    //     handleNotification: async () => {
+    //         return {
+    //             shouldShowAlert: true,
+    //             shouldPlaySound: true,
+    //             shouldSetBadge: true,
+    //         };
+    //     },
+    // });
+
+    // const showNotification = () => {
+    //     const content = { title: "I am a one, hasty notification." };
+    //     Notifications.scheduleNotificationAsync({ content, trigger: null });
+    // };
 
     return (
         // <View style={styles.someview}>
@@ -103,6 +119,7 @@ export default function App() {
         //         />
         //     </Tab.Navigator>
         // </NavigationContainer>
+
         <AuthContext.Provider value={{ user, setUser }}>
             <NavigationContainer ref={navigationRef} theme={navigationTheme}>
                 {user ? <AppNavigator /> : <AuthNavigator />}
@@ -141,5 +158,9 @@ export default function App() {
         // <NavigationContainer>
         //     <TabNavigator />
         // </NavigationContainer>
+
+        // <Screen>
+        //     <AppButton title="Tap me" onPress={showNotification} />
+        // </Screen>
     );
 }

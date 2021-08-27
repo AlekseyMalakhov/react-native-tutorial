@@ -1,16 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import * as Notifications from "expo-notifications";
 import AccountNavigator from "./AccountNavigator";
 import FeedNavigator from "./FeedNavigator";
 import ListingEditScreen from "../screens/ListingEditScreen";
 import NewListingButton from "./NewListingButton";
 import routes from "./routes";
-import expoPushTokensApi from "../api/expoPushTokens";
-import Constants from "expo-constants";
-import { Platform } from "react-native";
-import navigation from "./rootNavigation";
+
 import useNotifications from "../hooks/useNotifications";
 
 const Tab = createBottomTabNavigator();
