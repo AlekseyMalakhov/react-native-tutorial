@@ -35,6 +35,7 @@ import AuthContext from "./app/auth/context";
 import authStorage from "./app/auth/storage";
 import jwtDecode from "jwt-decode";
 import AppLoading from "expo-app-loading";
+import { navigationRef } from "./app/navigation/rootNavigation";
 
 const styles = StyleSheet.create({});
 
@@ -103,7 +104,9 @@ export default function App() {
         //     </Tab.Navigator>
         // </NavigationContainer>
         <AuthContext.Provider value={{ user, setUser }}>
-            <NavigationContainer theme={navigationTheme}>{user ? <AppNavigator /> : <AuthNavigator />}</NavigationContainer>
+            <NavigationContainer ref={navigationRef} theme={navigationTheme}>
+                {user ? <AppNavigator /> : <AuthNavigator />}
+            </NavigationContainer>
             <OfflineNotice />
         </AuthContext.Provider>
 
