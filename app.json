@@ -26,6 +26,11 @@
         "web": {
             "favicon": "./app/assets/favicon.png"
         },
-        "description": "A test project"
+        "description": "A test project",
+        "extra": {
+            "bugsnag": {
+                "apiKey": "49b28934aa08681e8e0ae73512af3ff3"
+            }
+        }
     }
 }
